@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_controller.dart';
+
 class Home extends StatefulWidget {
   @override
   State<Home> createState() {
@@ -13,19 +15,15 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home Page')),
-      body: Container(
-          height: 200,
-          width: 200,
-          color: Colors.black,
-          child: Center(
-            //Without the Center, the black square doesn't even render, even if it's smaller
-            //The Center is a SingleChildRenderObjectWidget, it's like another "person" that draws one more thing
-            child: Container(
-              height: 100,
-              width: 100,
-              color: Colors.yellow,
-            ),
-          )),
+      body: Center(
+          child: Switch(
+        value: AppController.instance.isDarkTheme,
+        onChanged: (value) {
+          setState(() {
+            AppController.instance.changeTheme();
+          });
+        },
+      )),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
