@@ -22,12 +22,36 @@ class HomeState extends State<Home> {
           // center horizontally
           width: double.infinity,
           height: double.infinity,
-          child: Column(
-              //center vertically
-              mainAxisAlignment: MainAxisAlignment.center,
-              //align children
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [Text('Counter: $counter'), CustomSwitcher()])),
+          // Column is not scrollable
+          // List view is scrollable
+          child: ListView(scrollDirection: Axis.vertical, //default is vertical
+              children: [
+                Text('Counter: $counter'),
+                Container(
+                  //blank space
+                  height: 10,
+                ),
+                CustomSwitcher(),
+                Container(
+                  //blank space
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.black,
+                    ),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.black,
+                    ),
+                  ],
+                )
+              ])),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
