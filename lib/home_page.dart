@@ -14,6 +14,28 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(children: [
+          UserAccountsDrawerHeader(
+              currentAccountPicture: Image.asset('assets/images/user.png'),
+              accountName: Text('Pedro'),
+              accountEmail: Text('pedrosantospinhodev@gmail.com')),
+          ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              subtitle: Text('Home screen'),
+              onTap: () {
+                print('home');
+              }),
+          ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              subtitle: Text('End session'),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/');
+              }),
+        ]),
+      ),
       appBar: AppBar(
         title: Text('Home Page'),
         actions: [CustomSwitcher()],
@@ -24,34 +46,37 @@ class HomeState extends State<Home> {
           height: double.infinity,
           // Column is not scrollable
           // List view is scrollable
-          child: ListView(scrollDirection: Axis.vertical, //default is vertical
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              //blank space
+              height: 10,
+            ),
+            Text('Counter: $counter'),
+            Container(
+              //blank space
+              height: 10,
+            ),
+            CustomSwitcher(),
+            Container(
+              //blank space
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text('Counter: $counter'),
                 Container(
-                  //blank space
-                  height: 10,
+                  width: 50,
+                  height: 50,
+                  color: Colors.black,
                 ),
-                CustomSwitcher(),
                 Container(
-                  //blank space
-                  height: 10,
+                  width: 50,
+                  height: 50,
+                  color: Colors.black,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.black,
-                    ),
-                    Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.black,
-                    ),
-                  ],
-                )
-              ])),
+              ],
+            )
+          ])),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {

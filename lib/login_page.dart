@@ -25,38 +25,50 @@ class _LoginState extends State<Login> {
                 child: Image.asset('assets/images/flutter-logo.png'),
               ),
               Container(height: 20),
-              TextField(
-                  onChanged: (text) {
-                    email = text;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Email')),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  onChanged: (text) {
-                    password = text;
-                  },
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Password')),
-              SizedBox(
-                height: 25,
-              ),
-              RaisedButton(
-                onPressed: () {
-                  if (email != null && password != null) {
-                    //Automatic routing
-                    Navigator.of(context).pushReplacementNamed('/home');
-                    print('Success! $email, $password');
-                  } else {
-                    print('Trick of the light');
-                  }
-                },
-                child: Text('Login'),
-              )
+              Card(
+                  child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 12, right: 12, top: 20, bottom: 12),
+                child: Column(
+                  children: [
+                    TextField(
+                        onChanged: (text) {
+                          email = text;
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(), labelText: 'Email')),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                        onChanged: (text) {
+                          password = text;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password')),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    RaisedButton(
+                      textColor: Colors.white,
+                      color: Colors.purple,
+                      onPressed: () {
+                        if (!email.isEmpty && !password.isEmpty) {
+                          //Automatic routing
+                          Navigator.of(context).pushReplacementNamed('/home');
+                          print('Success! $email, $password');
+                        } else {
+                          print('Trick of the light');
+                        }
+                      },
+                      child: Text('Login'),
+                    )
+                  ],
+                ),
+              )),
             ],
           ),
         ),
