@@ -22,6 +22,10 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                child: Image.asset('assets/images/flutter-logo.png'),
+              ),
+              Container(height: 20),
               TextField(
                   onChanged: (text) {
                     email = text;
