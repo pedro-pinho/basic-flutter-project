@@ -18,7 +18,16 @@ class HomeState extends State<Home> {
         title: Text('Home Page'),
         actions: [CustomSwitcher()],
       ),
-      body: Center(child: CustomSwitcher()),
+      body: Container(
+          // center horizontally
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+              //center vertically
+              mainAxisAlignment: MainAxisAlignment.center,
+              //align children
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [Text('Counter: $counter'), CustomSwitcher()])),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
