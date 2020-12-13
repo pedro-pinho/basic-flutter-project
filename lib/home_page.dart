@@ -17,7 +17,9 @@ class HomeState extends State<Home> {
       drawer: Drawer(
         child: Column(children: [
           UserAccountsDrawerHeader(
-              currentAccountPicture: Image.asset('assets/images/user.png'),
+              currentAccountPicture: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset('assets/images/user.png')),
               accountName: Text('Pedro'),
               accountEmail: Text('pedrosantospinhodev@gmail.com')),
           ListTile(
