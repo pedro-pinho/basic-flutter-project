@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'home_page.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -25,50 +24,27 @@ class _LoginState extends State<Login> {
                 child: Image.asset('assets/images/flutter-logo.png'),
               ),
               Container(height: 20),
-              Card(
-                  child: Padding(
+              Text('My first flutter project',
+                  style: TextStyle(color: Colors.white)),
+              Container(height: 20),
+              Text('Now with new homepage!',
+                  style: TextStyle(color: Colors.white)),
+              Padding(
                 padding: const EdgeInsets.only(
                     left: 12, right: 12, top: 20, bottom: 12),
                 child: Column(
                   children: [
-                    TextField(
-                        onChanged: (text) {
-                          email = text;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(), labelText: 'Email')),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                        onChanged: (text) {
-                          password = text;
-                        },
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Password')),
-                    SizedBox(
-                      height: 25,
-                    ),
                     RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.purple,
+                      textColor: Colors.purple,
+                      color: Colors.white,
                       onPressed: () {
-                        if (!email.isEmpty && !password.isEmpty) {
-                          //Automatic routing
-                          Navigator.of(context).pushReplacementNamed('/home');
-                          print('Success! $email, $password');
-                        } else {
-                          print('Trick of the light');
-                        }
+                        initiateFacebookLogin(context);
                       },
-                      child: Text('Login'),
-                    )
+                      child: Text('Login with Facebook'),
+                    ),
                   ],
                 ),
-              )),
+              ),
             ],
           ),
         ),
@@ -91,5 +67,23 @@ class _LoginState extends State<Login> {
         _body(),
       ],
     ));
+  }
+}
+
+void initiateFacebookLogin(context) async {
+  var facebookLogin = FacebookLogin();
+  var facebookLoginResult =
+      await facebookLogin.logInWithReadPermissions(['email']);
+  switch (facebookLoginResult.status) {
+    case FacebookLoginStatus.error:
+      print(facebookLoginResult.errorMessage);
+      break;
+    case FacebookLoginStatus.cancelledByUser:
+      print("CancelledByUser");
+      break;
+    case FacebookLoginStatus.loggedIn:
+      print("LoggedIn, token?", facebookLoginResult.accessToken.token);
+      Navigator.of(context).pushReplacementNamed('/home');
+      break;
   }
 }
