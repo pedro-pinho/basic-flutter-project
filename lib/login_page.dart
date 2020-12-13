@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -43,6 +45,13 @@ class _LoginState extends State<Login> {
               RaisedButton(
                 onPressed: () {
                   if (email != null && password != null) {
+                    //Manual routing
+                    //Go to next page, but dont discard this one
+                    /* Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => Home())); */
+                    //Go to next page, and discard this one
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => Home()));
                     print('Success! $email, $password');
                   } else {
                     print('Trick of the light');
