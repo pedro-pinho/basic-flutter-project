@@ -10,10 +10,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String email = '';
   String password = '';
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
+
+  Widget _body() {
+    return SingleChildScrollView(
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -62,6 +61,23 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Stack(
+      children: [
+        SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Image.asset('assets/images/purple-background.jpg',
+                fit: BoxFit.cover)),
+        Container(
+          color: Colors.black.withOpacity(0.3),
+        ),
+        _body(),
+      ],
     ));
   }
 }
